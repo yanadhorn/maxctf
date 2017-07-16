@@ -101,7 +101,8 @@ Setting my filter to `tcp.stream eq 1`, right clicking the first packet listed, 
 ![tcpstream](flag1/tcpstream.png)
 
 By selecting the "Hex Dump" option of the tcp stream, we can see the first few hex bytes. A quick google search of "1f 8b" lets us know this is a gzip archive, and we can assume flag.png is inside of it.
-https://en.wikipedia.org/wiki/List_of_file_signatures
+
+* https://en.wikipedia.org/wiki/List_of_file_signatures
 
 All we have to do now is click "Raw" and "Save as" and save our file as "flag.gz" or "flag.tar.gz" and use tar or gunzip to extract the file.
 
@@ -439,8 +440,10 @@ Taking a look into the source gives us a hint as to what we need to do in order 
 It tells us that we need to be using an XML exploit of some sort. The first one that came to my mind was XML injection. You can use it to edit XML files/databases. This sounded like a great idea at first. I'll just use some simple XML injection to write myself in as an admin user!
 
 More information on XML injection here:
-https://www.owasp.org/index.php/Testing_for_XML_Injection_(OTG-INPVAL-008)
-http://projects.webappsec.org/w/page/13247004/XML%20Injection
+
+* https://www.owasp.org/index.php/Testing_for_XML_Injection_(OTG-INPVAL-008)
+
+* http://projects.webappsec.org/w/page/13247004/XML%20Injection
 
 Without really thinking about it, I started plugging in some tests for XML injection. Of course it got me nowhere. I wasn't trying to understand the problem at hand.
 
@@ -471,7 +474,9 @@ $('#submit').click(function(e){
 
 After some more research, I found out about an interesting XML attack called XML External Entity or XXE for short. With this attack you can access local files. Let's try and see what we can do.
 
-First attempt was a copy and paste straight from https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing.
+First attempt was a copy and paste straight from
+
+* https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing.
 
 ```XML
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -510,7 +515,8 @@ The outer part of our form is "person", so that will be what goes next to our "!
 ```
 
 More information on XML DTD's can be found here.
-https://www.w3schools.com/xml/xml_dtd.asp
+
+* https://www.w3schools.com/xml/xml_dtd.asp
 
 One major issue I had was newlines. When making a request, make sure that you do not have newlines in your form.
 
@@ -638,10 +644,14 @@ The binary we need to have in order to target it, is found on the box at `/root/
 I installed secure copy (scp) with `yum install scp` in order to get it off the box easily.
 
 References:
-https://www.exploit-db.com/docs/28476.pdf
-https://crypto.stanford.edu/cs155/papers/formatstring-1.2.pdf
-http://codearcana.com/posts/2013/05/02/introduction-to-format-string-exploits.html
-http://www.cgsecurity.org/Articles/SecProg/Art4/
+
+* https://www.exploit-db.com/docs/28476.pdf
+
+* https://crypto.stanford.edu/cs155/papers/formatstring-1.2.pdf
+
+* http://codearcana.com/posts/2013/05/02/introduction-to-format-string-exploits.html
+
+* http://www.cgsecurity.org/Articles/SecProg/Art4/
 
 `readelf -h binary`
 Output:
