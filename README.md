@@ -109,8 +109,10 @@ All we have to do now is click "Raw" and "Save as" and save our file as "flag.gz
 ![flag](flag1/flag.png)
 
 Note:
-Strings works on pcapngs. "flag.png" was readily readable by running strings on it.
-You can get some interesting metadata of pcapng files by uploading them to pcapng.com
+
+1. Strings works on pcapngs. "flag.png" was readily readable by running strings on it.
+
+2. You can get some interesting metadata of pcapng files by uploading them to pcapng.com
 
 ---
 
