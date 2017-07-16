@@ -765,7 +765,13 @@ Now we know that we're targeting the 7th parameter on the stack, we can test it 
 
 The format we want to use is: `echo -e '<address>AA%<parameter>\$s'`
 
-The address is "backwards" because it's little endian (if we go back to our readelf output, it tells us that). AA is a buffer so we can clearly see the text. We are targeting the 7th parameter. We want to print a string (s).
+* The address is "backwards" because it's little endian (if we go back to our readelf output, it tells us that).
+
+* AA is a buffer so we can clearly see the text.
+
+* We are targeting the 7th parameter.
+
+* We want to print a string (s).
 
 ```
 [nick@box Desktop]$ echo -e "\xb2\x87\x04\x08AA%7\$s" | ./binary
