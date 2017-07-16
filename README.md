@@ -702,6 +702,8 @@ Hello: hello
 You are the incorrect user
 ```
 
+**Direct Parameter Accessing**:
+
 Let's give it some formats and see what we get back!
 
 `echo -e '|%x|%x|%x|%x|%x|%x|%x|%x|%x|%x' | ./binary`
