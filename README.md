@@ -15,6 +15,7 @@
 `$ nmap -sV --script=http-enum --version-intensity 5 10.13.37.1/24 -e tun0`
 
 Nmap scan report for 10.13.37.1 (PFSENSE)
+
 | Port | State | Service  | Version |
 | -----|:-----:| ---------|---------|
 |22/tcp|  open|  ssh|      OpenSSH 7.2 (protocol 2.0)
@@ -23,6 +24,7 @@ Nmap scan report for 10.13.37.1 (PFSENSE)
 |443/tcp| open|  ssl/http| nginx
 
 Nmap scan report for 10.13.37.2 (SCOREBOARD)
+
 | Port | State | Service  | Version |
 | -----|:-----:| ---------|---------|
 |22/tcp| open|  ssh|     OpenSSH 6.6.1 (protocol 2.0)
@@ -33,6 +35,7 @@ Nmap scan report for 10.13.37.2 (SCOREBOARD)
 ```
 
 Nmap scan report for 10.13.37.3 (Host 1)
+
 | Port | State | Service  | Version |
 | -----|:-----:| ---------|---------|
 |22/tcp|   closed| ssh|
@@ -49,6 +52,7 @@ Nmap scan report for 10.13.37.3 (Host 1)
 ```
 
 Nmap scan report for 10.13.37.4 (Host 2)
+
 | Port | State | Service  | Version |
 | -----|:-----:| ---------|---------|
 |22/tcp|   open|  ssh|     OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)
@@ -56,6 +60,7 @@ Nmap scan report for 10.13.37.4 (Host 2)
 |2222/tcp| open|  ssh|     OpenSSH 6.6.1 (protocol 2.0)
 
 Nmap scan report for 10.13.37.5 (Host 3)
+
 | Port | State | Service  |
 | -----|:-----:| ---------|
 |22/tcp|   open|  ssh
@@ -194,7 +199,8 @@ Picture below is isolating the admin creds by ID.
 
 Earlier we scanned `10.13.37.3` and found that it also had a webserver running on it.
 
-Nmap:
+Nmap
+
 | Port | State | Service  | Version |
 | -----|:-----:| ---------|---------|
 |22/tcp|   closed| ssh|
@@ -264,7 +270,8 @@ It didn't. I just felt bad for abusing the network.
 
 Our previous NMAP scans let us know that there was an open port on port 7777 for the 10.13.37.3 host.
 
-Nmap:
+Nmap
+
 | Port | State | Service  | Version |
 | -----|:-----:| ---------|---------|
 |22/tcp|   closed| ssh|
@@ -615,6 +622,7 @@ Now we have a root shell, so I'll just go ahead and change the password to `nick
 Flag 8 **requires** root on the box from Flags 6 and 7. 
 
 Nmap
+
 | Port | State | Service  |
 | -----|:-----:| ---------|
 |22/tcp|   open|  ssh
