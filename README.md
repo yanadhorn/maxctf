@@ -807,13 +807,13 @@ The format we want to follow for this is: `echo -e '<address>%<value - bytes wri
 
 We have all this information, so we can simply fill it in.
 
-Address: `0x804a04c` = `\x4c\xa0\x04\x08`
+* Address: `0x804a04c` = `\x4c\xa0\x04\x08`
 
-Value: `0xDEAD`
+* Value: `0xDEAD`
 
-Bytes Written: `len(Address)` = `4`
+* Bytes Written: `len(Address)` = `4`
 
-Target: `7`
+* Target: `7`
 
 Because we have written 4 bytes already, our value changes from 0xDEAD to 0xDEA9. We have to turn this into decimal form for it to work AFAIK.
 
