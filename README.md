@@ -272,6 +272,26 @@ It didn't. I just felt bad for abusing the network.
 
 ## Flag 5
 
+Note: I didn't get this during the CTF.
+
+There was an extremely easy command injection vulnerability on the "isUp" api.
+
+By plugging in a bash pipe `|`, we were able to use the API to execute arbitrary commands.
+
+![root](flag5/root.png)
+
+
+
+![lsroot](flag5/lsroot.png)
+
+
+
+![flag9](flag5/flag.png)
+
+---
+
+## Flag 6
+
 Our previous NMAP scans let us know that there was an open port on port 7777 for the 10.13.37.3 host.
 
 Nmap
@@ -422,11 +442,11 @@ Your current status is 144
 XXmUBaC2fJFb4S7U
 ```
 
-![flag5](flag5/flag.png)
+![flag6](flag6/flag.png)
 
 ---
 
-## Flag 6
+## Flag 7
 
 We haven't touch the `10.13.37.5` box yet, so let's give that a shot.
 
@@ -442,11 +462,11 @@ Our Nmap scan shows up that it's also running a webserver.
 
 Navigate to `http://10.13.37.5` and we get this inviting webpage.
 
-![webpage6](flag6/webpage.png)
+![webpage7](flag7/webpage.png)
 
 Taking a look into the source gives us a hint as to what we need to do in order to exploit the page.
 
-![xml](flag6/xml.png)
+![xml](flag7/xml.png)
 
 It tells us that we need to be using an XML exploit of some sort. The first one that came to my mind was XML injection. You can use it to edit XML files/databases. This sounded like a great idea at first. I'll just use some simple XML injection to write myself in as an admin user!
 
@@ -531,7 +551,7 @@ More information on XML DTD's can be found here.
 
 One major issue I had was newlines. When making a request, make sure that you do not have newlines in your form.
 
-![newlines](flag6/newlines.png)
+![newlines](flag7/newlines.png)
 
 ```Python
 import requests
@@ -542,11 +562,11 @@ print(r.text)
 
 Passwd:
 
-![passwd](flag6/passwd.png)
+![passwd](flag7/passwd.png)
 
 Shadow:
 
-![shadow](flag6/shadow.png)
+![shadow](flag7/shadow.png)
 
 The full shadow file can be found at `Flag 6/shadow.out`.
 
@@ -578,9 +598,9 @@ Our flag is `linuxgentoo`. This also serves as a password we can use to ssh into
 
 ---
 
-## Flag 7
+## Flag 8
 
-Flag 7 deals with the post exploitation of the box we compromised in Flag 6.
+Flag 8 deals with the post exploitation of the box we compromised in Flag 6.
 
 ### Post Exploitation
 
@@ -636,9 +656,9 @@ Now we have a root shell, so I'll just go ahead and change the password to `nick
 
 ---
 
-## Flag 8
+## Flag 9
 
-Flag 8 **requires** root on the box from Flags 6 and 7. 
+Flag 9 **requires** root on the box from Flags 7 and 8. 
 
 Nmap
 
@@ -836,7 +856,7 @@ Now we get a long output of text and "Welcome Dan" which means that it worked on
 All we have left to do is exploit it remotely and cat the target file.
 `echo -e '\x4c\xa0\x04\x08%57001c%7$n' | nc 10.13.37.5 7777`
 
-![flag8](flag8/flag.png)
+![flag9](flag9/flag.png)
 
 ---
 
